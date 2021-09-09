@@ -16,7 +16,7 @@ class UsersImportController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->data;
+        $data = str_replace('/', '', $request->data);
         $file = $request->file('file');
 
         $produtos = Excel::toArray(new UsersImport(), $file)[0];
