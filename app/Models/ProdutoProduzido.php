@@ -9,7 +9,7 @@ class ProdutoProduzido extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $table = 'produto_produzido';
+    protected $table = 'public.produto_produzido';
     protected $primaryKey = 'cd_produto_produzido';
     protected $fillable = [
         'cd_produto_produzido',
@@ -21,8 +21,21 @@ class ProdutoProduzido extends Model
         'estoque',
     ];
 
-    public static function insert($ar)
+    public static function insert($ar, $data)
     {
-        return self::create($ar);
+        foreach ($ar as $value) {
+            $produto = self::create($value);
+
+            $arProducao = [
+                'cd_produto_produzido' => $produto['cd_produto_produzido'],
+                'data' => $data,
+            ];
+
+            $producao = Producao::insert($arProducao);
+        }
+
+        if ($producao) {
+            return true;
+        }
     }
 }

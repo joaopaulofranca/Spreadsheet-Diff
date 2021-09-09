@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Producao;
 use App\Models\ProdutoProduzido;
 use App\Models\UsersImport;
 use Illuminate\Http\Request;
@@ -35,18 +34,12 @@ class UsersImportController extends Controller
                 'estoque' => $value[5],
             ];
         }
-        $list = ProdutoProduzido::insert($ar);
+        $list = ProdutoProduzido::insert($ar, $data);
 
-        $arProducao = [
-            'cd_produto_produzido' => $list->cd_produto_produzido,
-            'data' => $data,
-        ];
-
-        $producao = Producao::insert($arProducao);
-        if (!$producao) {
-            response(['mensage' => 'Produção não foi inserida!'], 500);
+        if (!$list) {
+            return response(['mensage' => 'Produção não foi inserida!'], 500);
         }
 
-        return $producao;
+        return response(['mensage' => 'Produção inserida com sucesso!'], 200);
     }
 }

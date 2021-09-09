@@ -9,7 +9,7 @@ class Producao extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $table = 'producao';
+    protected $table = 'public.producao';
     protected $primaryKey = 'cd_producao';
     protected $fillable = [
         'cd_producao',
@@ -20,5 +20,21 @@ class Producao extends Model
     public static function insert($arProducao)
     {
         return self::create($arProducao);
+    }
+
+    public static function getProducaoToCompare($data)
+    {
+        $producao = self::selectRaw('pp.*')
+            ->join('produto_produzido as pp', 'pp.cd_produto_produzido', '=', 'producao.cd_produto_produzido')
+            ->where('producao.data', $data)
+            ->get()
+        ;
+
+        $ar = [];
+        foreach ($producao as $value) {
+            $ar[$value->codigo] = $value;
+        }
+
+        return $ar;
     }
 }
