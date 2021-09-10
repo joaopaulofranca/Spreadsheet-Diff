@@ -12,6 +12,7 @@ class UsersImportController extends Controller
     public function show()
     {
         return view('users.import');
+        // return view('users.relatorio');
     }
 
     public function store(Request $request)
