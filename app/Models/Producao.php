@@ -22,11 +22,11 @@ class Producao extends Model
         return self::create($arProducao);
     }
 
-    public static function getProducaoToCompare($data)
+    public static function getProducaoPlanilhaOld($codData)
     {
         $producao = self::selectRaw('pp.*')
             ->join('produto_produzido as pp', 'pp.cd_produto_produzido', '=', 'producao.cd_produto_produzido')
-            ->where('producao.data', $data)
+            ->where('producao.data', $codData)
             ->get()
         ;
 
@@ -36,5 +36,30 @@ class Producao extends Model
         }
 
         return $ar;
+    }
+
+    public static function getProducaoToCompare($codData)
+    {
+        $producao = self::selectRaw('pp.*')
+            ->join('produto_produzido as pp', 'pp.cd_produto_produzido', '=', 'producao.cd_produto_produzido')
+            ->where('producao.data', $codData)
+            ->get()
+        ;
+
+        $ar = [];
+        foreach ($producao as $value) {
+            $ar[$value->codigo] = $value;
+        }
+
+        return $ar;
+    }
+
+    public static function getList()
+    {
+        return self::selectRaw('data')
+            ->groupBy('data')
+            ->orderByRaw('data desc')
+            ->get()
+        ;
     }
 }

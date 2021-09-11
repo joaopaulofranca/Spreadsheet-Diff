@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Producao;
 use App\Models\ProdutoProduzido;
 use App\Models\UsersImport;
 use Illuminate\Http\Request;
@@ -9,9 +10,15 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class UsersImportController extends Controller
 {
-    public function show()
+    public function index()
     {
-        return view('users.import');
+        $selectList = Producao::getList();
+
+        return view('users.import', [
+            'selectList' => $selectList,
+            'secondSelectList' => $selectList,
+        ]);
+
         // return view('users.relatorio');
     }
 
@@ -29,18 +36,43 @@ class UsersImportController extends Controller
             $ar[$value[1]] = [
                 'hanking' => $value[0],
                 'codigo' => $value[1],
-                'descricao' => $value[2],
-                'variacao' => $value[3],
-                'qt_produzido' => $value[4],
-                'estoque' => $value[5],
+                'descricao' => $value[2] ?? 'não informado',
+                'variacao' => $value[3] ?? 0,
+                'qt_produzido' => $value[4] ?? 0,
+                'estoque' => $value[5] ?? 0,
             ];
         }
         $list = ProdutoProduzido::insert($ar, $data);
 
-        if (!$list) {
-            return response(['mensage' => 'Produção não foi inserida!'], 500);
+        if ($list) {
+            return redirect()->back()->with('success', 'Upload foi realizado com sucesso!');
         }
 
-        return response(['mensage' => 'Produção inserida com sucesso!'], 200);
+        return redirect()->back()->with('error', 'Algo de errado não esta certo!');
+    }
+
+    public function compare(Request $request)
+    {
+        $codigoAnterior = str_replace('/', '', $request->codigo_anterior);
+        $codigoAtual = str_replace('/', '', $request->codigo_atual);
+
+        $planinhaAnterior = Producao::getProducaoPlanilhaOld($codigoAnterior);
+        $planinhaAtual = Producao::getProducaoToCompare($codigoAtual);
+
+        $arProdutos = [];
+        foreach ($planinhaAnterior as $key => $value) {
+            if ($planinhaAtual[$value->codigo]) {
+                $atual = $planinhaAtual[$value->codigo];
+                if ($value->variacao != $atual->variacao) {
+                    $arProdutos[] = $atual;
+                }
+            } else {
+                $arProdutos[] = $value;
+            }
+        }
+
+        return view('users.relatorio', [
+            'listProdutos' => $arProdutos,
+        ]);
     }
 }

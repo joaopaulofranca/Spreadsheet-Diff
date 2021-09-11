@@ -75,6 +75,9 @@
         </nav><br>
         <div class="row boxTwo">
             <div class="col-6 ">
+                <div>
+                    @include('../alerts')
+                </div>
                 <div class="card">
                     <div class="card-header bgColorGray" style="color:white;"><b>IMPORT PLANILHA</b></div>
 
@@ -93,7 +96,7 @@
 
                             </div>
                             <div class="data">
-                                <input id="text" type="text" placeholder=" Data (ex: xx/xxxx) " name="data"
+                                <input id="text" type="text" placeholder=" ex: MM/AAAA " name="data"
                                     class="form-control form-icon-trailing">
 
                             </div>
@@ -129,23 +132,30 @@
                             <div class="row">
                                 @csrf
                                 <div class="col-6">
+
                                     <p>Primeira planilha</p>
-                                    <select class="form-select form-select-lg selectColorGreen"
+                                    <select class="form-select form-select-lg selectColorGreen" name="codigo_anterior"
                                         aria-label=".form-select-lg example">
-                                        <option selected>Selecione uma planilha</option>
-                                        <option value="1">Planilha 01/2021</option>
-                                        <option value="2">Planilha 02/2021</option>
-                                        <option value="3">Planilha 03/2021</option>
+                                        <option selected> --- Selecione --- </option>
+                                        @foreach ($selectList as $selectList)
+                                        <option value="{{ $selectList->data }}">{{
+                                            preg_replace("/(\d{2})(\d{4})/", "\$1/\$2", $selectList->data) }}
+
+                                        </option>
+                                        @endforeach
+
                                     </select>
                                 </div>
                                 <div class="col-6">
                                     <p>Segunda planilha</p>
-                                    <select class="form-select form-select-lg selectColorGreen"
+                                    <select class="form-select form-select-lg selectColorGreen" name="codigo_atual"
                                         aria-label=".form-select-lg example">
-                                        <option selected>Selecione uma planilha</option>
-                                        <option value="1">Planilha 01/2021</option>
-                                        <option value="2">Planilha 02/2021</option>
-                                        <option value="3">Planilha 03/2021</option>
+                                        <option selected> --- Selecione --- </option>
+                                        @foreach ($secondSelectList as $selectList)
+                                        <option value="{{ $selectList->data }}">{{
+                                            preg_replace("/(\d{2})(\d{4})/", "\$1/\$2", $selectList->data) }}
+                                        </option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
