@@ -59,6 +59,17 @@ class Producao extends Model
         return self::selectRaw('data')
             ->groupBy('data')
             ->orderByRaw('data desc')
+            ->limit(4)
+            ->get()
+        ;
+    }
+
+    public static function getListAtual()
+    {
+        return self::selectRaw('data')
+            ->groupBy('data')
+            ->orderByRaw('data desc')
+            ->limit(1)
             ->get()
         ;
     }

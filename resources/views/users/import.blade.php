@@ -125,6 +125,9 @@
 
         <div class="row boxTwo">
             <div class="col-6">
+                <div>
+                    @include('../alertPlan')
+                </div>
                 <div class="card">
                     <div class="card-header bgColorGray" style="color:white;"><b>COMPARAR PLANILHA</b></div>
                     <div class="card-body">
@@ -133,7 +136,7 @@
                                 @csrf
                                 <div class="col-6">
 
-                                    <p>Primeira planilha</p>
+                                    <p>Planilha Anterior</p>
                                     <select class="form-select form-select-lg selectColorGreen" name="codigo_anterior"
                                         aria-label=".form-select-lg example">
                                         <option selected> --- Selecione --- </option>
@@ -147,7 +150,7 @@
                                     </select>
                                 </div>
                                 <div class="col-6">
-                                    <p>Segunda planilha</p>
+                                    <p>Planilha Atual</p>
                                     <select class="form-select form-select-lg selectColorGreen" name="codigo_atual"
                                         aria-label=".form-select-lg example">
                                         <option selected> --- Selecione --- </option>

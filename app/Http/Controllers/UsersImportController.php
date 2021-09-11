@@ -13,13 +13,12 @@ class UsersImportController extends Controller
     public function index()
     {
         $selectList = Producao::getList();
+        $selectListAtual = Producao::getListAtual();
 
         return view('users.import', [
             'selectList' => $selectList,
-            'secondSelectList' => $selectList,
+            'secondSelectList' => $selectListAtual,
         ]);
-
-        // return view('users.relatorio');
     }
 
     public function store(Request $request)
@@ -56,13 +55,14 @@ class UsersImportController extends Controller
         $codigoAnterior = str_replace('/', '', $request->codigo_anterior);
         $codigoAtual = str_replace('/', '', $request->codigo_atual);
 
-        $planinhaAnterior = Producao::getProducaoPlanilhaOld($codigoAnterior);
-        $planinhaAtual = Producao::getProducaoToCompare($codigoAtual);
+        $planilhaAnterior = Producao::getProducaoPlanilhaOld($codigoAnterior);
+        $planilhaAtual = Producao::getProducaoToCompare($codigoAtual);
 
         $arProdutos = [];
-        foreach ($planinhaAnterior as $key => $value) {
-            if ($planinhaAtual[$value->codigo]) {
-                $atual = $planinhaAtual[$value->codigo];
+
+        foreach ($planilhaAnterior as $key => $value) {
+            if ($planilhaAtual[$value->codigo]) {
+                $atual = $planilhaAtual[$value->codigo];
                 if ($value->variacao != $atual->variacao) {
                     $arProdutos[] = $atual;
                 }
@@ -70,9 +70,17 @@ class UsersImportController extends Controller
                 $arProdutos[] = $value;
             }
         }
+        if (empty($arProdutos)) {
+            return redirect()->back()->with('warning', 'Não há diferença entre as planilhas!');
+        }
 
         return view('users.relatorio', [
             'listProdutos' => $arProdutos,
         ]);
+    }
+
+    public function relatorio()
+    {
+        return view('users.relatorio');
     }
 }

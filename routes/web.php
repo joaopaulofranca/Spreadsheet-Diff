@@ -21,3 +21,4 @@ Route::get('/', 'App\Http\Controllers\UsersImportController@index');
 Route::get('/users', 'App\Http\Controllers\UsersImportController@show');
 Route::post('/users/import', 'App\Http\Controllers\UsersImportController@store');
 Route::post('/users/compare', 'App\Http\Controllers\UsersImportController@compare');
+Route::get('/users/relatorio', 'App\Http\Controllers\UsersImportController@relatorio');

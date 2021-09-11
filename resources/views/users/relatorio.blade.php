@@ -75,7 +75,8 @@
     }
 
     .inputBtn {
-        margin-left: 10px;
+        margin-right: 5px;
+        background-color: #7c7b7b;
     }
     </style>
 </head>
@@ -86,46 +87,41 @@
             <a class="navbar-brand" href="#"><b>Spreadsheet Diff</b></a>
 
         </nav><br>
-        <input type="button" style="color:white; border:none; padding:10px;" class="bgColorGray inputBtn" value="Voltar"
-            onClick="history.go(-1)">
+
         <div class="row boxRelatorio">
             <div class="col-8">
                 <div class="card">
-                    <div class="card-header bgColorGray" style="color:white;"><b>Relatório </b></div>
+                    <div class="card-header bgColorGray" style="color:white;"><b>Relatório de produtos produzidos há
+                            mais de dois anos.</b></div>
 
                     <div class="card-body">
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Primeiro</th>
-                                    <th scope="col">Último</th>
-                                    <th scope="col">Nickname</th>
+                                    <th scope="col">Codigo</th>
+                                    <th scope="col">Descrição</th>
+                                    <th scope="col">Variação</th>
+                                    <th scope="col">Qt.Produzido</th>
+                                    <th scope="col">Estoque</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($listProdutos as $produto)
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
+                                    <th scope="row">{{$produto->codigo}}</th>
+                                    <td>{{$produto->descricao}}</td>
+                                    <td>{{$produto->variacao}}</td>
+                                    <td>{{number_format($produto->qt_produzido, 2, ',', '.')}}</td>
+                                    <td>{{number_format($produto->estoque, 2, ',', '.')}}</td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
+
                         <button id="btn" class="btn bgColorGreen" style="color:white;"
                             onClick="window.print()">Imprimir</button>
+                        <button id="btn" class="btn inputBtn" style="color:white;"
+                            onClick="history.go(-1)">Voltar</button>
 
                     </div>
                 </div>
