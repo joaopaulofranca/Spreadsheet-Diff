@@ -16,69 +16,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-    <style>
-    .container {
-        width: 100%;
-        height: 15%;
-        margin: 0;
-    }
-
-    .box {
-        padding: 4%;
-    }
-
-    .boxTwo {
-        padding: 3%;
-    }
-
-    .boxRelatorio {
-        align-items: center;
-        justify-content: center;
-    }
-
-    .bgColorGreen {
-        background-color: #81b45b;
-    }
-
-    .selectColorGreen {
-        background-color: #81b45b;
-        padding: 5px;
-        /* border-radius: 8%; */
-        width: 350px;
-        height: 38px;
-        line-height: 38px;
-        font-family: "Roboto", sans-serif !important;
-        color: white;
-        font-size: 12px;
-        border-top: none;
-        border-left: none;
-        border-right: none;
-        border-bottom: none;
-        /* background: transparent; */
-    }
-
-    .bgColor {
-        background-color: #1b5a3d;
-    }
-
-    .bgColorGray {
-        background-color: #7c7b7b;
-    }
-
-    button {
-        margin-top: 50px;
-        float: right;
-    }
-
-    body {
-        font-family: "Roboto", sans-serif;
-    }
-
-    .inputBtn {
-        margin-right: 5px;
-        background-color: #7c7b7b;
-    }
-    </style>
 </head>
 
 <body>
@@ -135,3 +72,68 @@
 </body>
 
 </html>
+
+<style>
+    .container {
+        width: 100%;
+        height: 15%;
+        margin: 0;
+    }
+
+    .box {
+        padding: 4%;
+    }
+
+    .boxTwo {
+        padding: 3%;
+    }
+
+    .boxRelatorio {
+        align-items: center;
+        justify-content: center;
+    }
+
+    .bgColorGreen {
+        background-color: #81b45b;
+    }
+
+    .selectColorGreen {
+        background-color: #81b45b;
+        padding: 5px;
+        /* border-radius: 8%; */
+        width: 350px;
+        height: 38px;
+        line-height: 38px;
+        font-family: "Roboto", sans-serif !important;
+        color: white;
+        font-size: 12px;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+        /* background: transparent; */
+    }
+
+    .bgColor {
+        background-color: #1b5a3d;
+    }
+
+    .bgColorGray {
+        background-color: #7c7b7b;
+    }
+
+    button {
+        margin-top: 50px;
+        float: right;
+    }
+
+    body {
+        font-family: "Roboto", sans-serif;
+        overflow-x: hidden;
+    }
+
+    .inputBtn {
+        margin-right: 5px;
+        background-color: #7c7b7b;
+    }
+</style>
