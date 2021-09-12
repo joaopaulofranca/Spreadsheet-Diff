@@ -18,6 +18,7 @@ class UsersImportController extends Controller
         return view('users.import', [
             'selectList' => $selectList,
             'secondSelectList' => $selectListAtual,
+            'selectListInfo' => $selectList,
         ]);
     }
 
@@ -26,6 +27,10 @@ class UsersImportController extends Controller
         $data = str_replace('/', '', $request->data);
         $file = $request->file('file');
 
+        if (!isset($file) || empty($file)) {
+            return redirect()->back()->with('error', 'Verifique se o arquivo foi selecionado!');
+        }
+
         $produtos = Excel::toArray(new UsersImport(), $file)[0];
 
         unset($produtos[0], $produtos[1], $produtos[2]);
@@ -33,12 +38,13 @@ class UsersImportController extends Controller
         $ar = [];
         foreach ($produtos as $key => $value) {
             $ar[$value[1]] = [
-                'hanking' => $value[0],
-                'codigo' => $value[1],
+                'hanking' => $value[0] ?? 0,
+                'codigo' => $value[1] ?? 0,
                 'descricao' => $value[2] ?? 'não informado',
                 'variacao' => $value[3] ?? 0,
                 'qt_produzido' => $value[4] ?? 0,
                 'estoque' => $value[5] ?? 0,
+                'data' => $data,
             ];
         }
         $list = ProdutoProduzido::insert($ar, $data);
@@ -60,9 +66,12 @@ class UsersImportController extends Controller
 
         $arProdutos = [];
 
-        foreach ($planilhaAnterior as $key => $value) {
-            if ($planilhaAtual[$value->codigo]) {
-                $atual = $planilhaAtual[$value->codigo];
+        foreach ($planilhaAnterior as $value) {
+            // if ('2227' == $value->codigo) {
+            //     $teste = 'jp';
+            // }
+            $atual = $planilhaAtual[$value->codigo];
+            if (!empty($atual)) {
                 if ($value->variacao != $atual->variacao) {
                     $arProdutos[] = $atual;
                 }
@@ -79,8 +88,21 @@ class UsersImportController extends Controller
         ]);
     }
 
-    public function relatorio()
+    public function destroy($codigo)
     {
-        return view('users.relatorio');
+        $producaoRemove = Producao::getByCodigo($codigo);
+        foreach ($producaoRemove as $key => $value) {
+            $producaoDeletada = $value->delete();
+        }
+        $produtoProduzidoRemove = ProdutoProduzido::getByCodigo($codigo);
+        foreach ($produtoProduzidoRemove as $key => $value) {
+            $produtoDeletado = $value->delete();
+        }
+
+        if ($producaoDeletada && $produtoDeletado) {
+            return redirect()->back()->with('deletado', 'Deletado com sucesso!');
+        }
+
+        return redirect()->back()->with('deleteError', 'Não foi deletado!');
     }
 }

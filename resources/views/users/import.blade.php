@@ -57,9 +57,16 @@
         background-color: #7c7b7b;
     }
 
-    button {
+    .botao {
         margin-top: 50px;
         float: right;
+    }
+
+    .btnB {
+        background-color: transparent;
+        color: gray;
+        border: none;
+
     }
 
     body {
@@ -96,29 +103,60 @@
 
                             </div>
                             <div class="data">
-                                <input id="text" type="text" placeholder=" ex: MM/AAAA " name="data"
-                                    class="form-control form-icon-trailing">
-
+                                <input id="text" type="text" placeholder=" ex: MM/AAAA " name="data" minlength="6"
+                                    style="max-width:150px;" maxlength="7" class="form-control">
                             </div>
-                            <button type="submit" class="btn bgColorGray" style="color:white;">Upload</button>
+                            <button type="submit" class="btn bgColorGray botao" style="color:white;">Upload</button>
                         </form>
                     </div>
                 </div>
             </div>
             <div class="col-6">
+                <div>
+                    @include('../deleteAlert')
+                </div>
                 <div class="card">
-                    <div class="card-header bgColorGray" style="color:white;"><b>INFORMAÇÕES</b></div>
+                    <div class="card-header bgColorGray" style="color:white;"><b>LISTAGEM DE PLANILHAS RECENTES</b>
+                    </div>
 
-                    <!-- <div class="card-body">
-                        <div class="col-3">
-                            <div class="card bgColorGreen" style="width: 22rem; color:white;border:none;">
-                                <div class="card-body">
-                                    <h5 class="card-title">Total de planilhas registradas</h5>
-                                    <p class="card-text" style="float: right;margin-right:15px;">15</p>
-                                </div>
-                            </div>
+                    <div class="card-body">
+                        <div class="col-12 justify-content-center">
+                            <table class="table table-sm table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Planilha</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($selectListInfo as $selectListInfo)
+                                    <tr>
+                                        <td>Referente ao mês {{preg_replace("/(\d{2})(\d{4})/", "\$1/\$2",
+                                            $selectListInfo->data) }}</td>
+                                        <td align="center">
+                                            <form method="POST" action="/users/remove/{{ $selectListInfo->data }}">
+                                                @csrf
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <button type="submit" class="btn bgColorGray btnB" style="color:white;"
+                                                    onClick="confirm('Deseja deletar ?')">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        fill="currentColor" class="bi bi-trash" style="color:gray;"
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                                        <path fill-rule="evenodd"
+                                                            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                                    </svg>
+                                                </button>
+                                            </form>
+                                        </td>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -162,7 +200,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <button type="submit" class="btn bgColorGray" style="color:white;">Comparar</button>
+                            <button type="submit" class="btn bgColorGray botao" style="color:white;">Comparar</button>
                         </form>
 
                     </div>

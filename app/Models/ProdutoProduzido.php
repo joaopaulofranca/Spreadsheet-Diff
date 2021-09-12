@@ -19,6 +19,7 @@ class ProdutoProduzido extends Model
         'variacao',
         'qt_produzido',
         'estoque',
+        'data',
     ];
 
     public static function insert($ar, $data)
@@ -37,5 +38,11 @@ class ProdutoProduzido extends Model
         if ($producao) {
             return true;
         }
+    }
+
+    public static function getByCodigo($codigo)
+    {
+        return self::where('data', $codigo)->get()
+        ;
     }
 }

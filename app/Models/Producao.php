@@ -73,4 +73,10 @@ class Producao extends Model
             ->get()
         ;
     }
+
+    public static function getByCodigo($codigo)
+    {
+        return self::where('data', $codigo)->get()
+        ;
+    }
 }
