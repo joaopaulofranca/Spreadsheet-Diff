@@ -47,7 +47,8 @@
                                 <div class="custom-file">
                                     <input type="file" name="file" class="custom-file-input" id="customFileLang"
                                         required id='val' lang="es">
-                                    <label class="custom-file-label" id="buttonFile" for="customFileLang">Selecionar
+                                    <label class="custom-file-label" id="buttonFile" for="customFileLang"
+                                        style="color:#7c7b7b">Selecionar
                                         Arquivo</label>
                                 </div>
 
