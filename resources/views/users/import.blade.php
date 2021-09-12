@@ -1,7 +1,7 @@
-<!DOCTYPE>
 <html>
 
 <head>
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -13,66 +13,12 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
-    <style>
-    .container {
-        width: 100%;
-        height: 15%;
-        margin: 0;
+    <script>
+    function mostra() {
+        document.getElementById('ma').style.display = 'block';
     }
+    </script>
 
-    .box {
-        padding: 4%;
-    }
-
-    .boxTwo {
-        padding: 3%;
-    }
-
-    .bgColorGreen {
-        background-color: #81b45b;
-    }
-
-    .selectColorGreen {
-        background-color: #81b45b;
-        padding: 5px;
-        /* border-radius: 8%; */
-        width: 350px;
-        height: 38px;
-        line-height: 38px;
-        font-family: "Roboto", sans-serif !important;
-        color: white;
-        font-size: 12px;
-        border-top: none;
-        border-left: none;
-        border-right: none;
-        border-bottom: none;
-        /* background: transparent; */
-    }
-
-    .bgColor {
-        background-color: #1b5a3d;
-    }
-
-    .bgColorGray {
-        background-color: #7c7b7b;
-    }
-
-    .botao {
-        margin-top: 50px;
-        float: right;
-    }
-
-    .btnB {
-        background-color: transparent;
-        color: gray;
-        border: none;
-
-    }
-
-    body {
-        font-family: "Roboto", sans-serif;
-    }
-    </style>
 </head>
 
 <body>
@@ -85,8 +31,11 @@
                 <div>
                     @include('../alerts')
                 </div>
+
                 <div class="card">
-                    <div class="card-header bgColorGray" style="color:white;"><b>IMPORT PLANILHA</b></div>
+                    <div class="card-header bgColorGray" style="color:white;"><b>IMPORT PLANILHA</b>
+
+                    </div>
 
                     <div class="card-body">
 
@@ -97,16 +46,20 @@
                                 <!-- <input type="file" name="file" /> -->
                                 <div class="custom-file">
                                     <input type="file" name="file" class="custom-file-input" id="customFileLang"
-                                        lang="es">
-                                    <label class="custom-file-label" for="customFileLang">Selecionar Arquivo</label>
+                                        required id='val' lang="es">
+                                    <label class="custom-file-label" id="buttonFile" for="customFileLang">Selecionar
+                                        Arquivo</label>
                                 </div>
 
                             </div>
                             <div class="data">
                                 <input id="text" type="text" placeholder=" ex: MM/AAAA " name="data" minlength="6"
-                                    style="max-width:150px;" maxlength="7" class="form-control">
+                                    style="max-width:150px;" maxlength="7" class="form-control" required>
                             </div>
-                            <button type="submit" class="btn bgColorGray botao" style="color:white;">Upload</button>
+                            <button type="submit" class="btn bgColorGray botao" onClick="mostra()" style="color:white;">
+                                Upload
+                            </button>
+                            <div id="ma" class="loader load hidden"></div>
                         </form>
                     </div>
                 </div>
@@ -148,6 +101,7 @@
                                                             d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
                                                     </svg>
                                                 </button>
+
                                             </form>
                                         </td>
                                         </td>
@@ -155,6 +109,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            <div id="de" class="loader load hidden"></div>
                         </div>
                     </div>
                 </div>
@@ -176,7 +131,7 @@
 
                                     <p>Planilha Anterior</p>
                                     <select class="form-select form-select-lg selectColorGreen" name="codigo_anterior"
-                                        aria-label=".form-select-lg example">
+                                        required aria-label=".form-select-lg example">
                                         <option selected> --- Selecione --- </option>
                                         @foreach ($selectList as $selectList)
                                         <option value="{{ $selectList->data }}">{{
@@ -190,7 +145,7 @@
                                 <div class="col-6">
                                     <p>Planilha Atual</p>
                                     <select class="form-select form-select-lg selectColorGreen" name="codigo_atual"
-                                        aria-label=".form-select-lg example">
+                                        required aria-label=".form-select-lg example">
                                         <option selected> --- Selecione --- </option>
                                         @foreach ($secondSelectList as $selectList)
                                         <option value="{{ $selectList->data }}">{{
@@ -215,3 +170,109 @@
 </body>
 
 </html>
+
+<style>
+.container {
+    width: 100%;
+    height: 15%;
+    margin: 0;
+}
+
+#inputArquivo {
+    display: none;
+}
+
+.box {
+    padding: 4%;
+}
+
+.boxTwo {
+    padding: 3%;
+}
+
+.bgColorGreen {
+    background-color: #81b45b;
+}
+
+.selectColorGreen {
+    background-color: #81b45b;
+    padding: 5px;
+    /* border-radius: 8%; */
+    width: 350px;
+    height: 38px;
+    line-height: 38px;
+    font-family: "Roboto", sans-serif !important;
+    color: white;
+    font-size: 12px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    /* background: transparent; */
+}
+
+.loader {
+    border: 5px solid #9c9b9b;
+    border-radius: 50%;
+    border-top: 5px solid #1b5a3d;
+    width: 30px;
+    height: 30px;
+    -webkit-animation: spin 1s linear infinite;
+    /* Safari */
+    animation: spin 1s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.bgColor {
+    background-color: #1b5a3d;
+}
+
+.bgColorGray {
+    background-color: #7c7b7b;
+}
+
+.botao {
+    margin-top: 50px;
+    float: right;
+}
+
+.load {
+    margin-top: 50px;
+    float: left;
+}
+
+.hidden {
+    display: none;
+}
+
+.btnB {
+    background-color: transparent;
+    color: gray;
+    border: none;
+
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+}
+</style>

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Producao extends Model
 {
     use HasFactory;
+    public const SELECT_PADRAO = '--- Selecione ---';
     public $timestamps = false;
     protected $table = 'public.producao';
     protected $primaryKey = 'cd_producao';
@@ -22,7 +23,7 @@ class Producao extends Model
         return self::create($arProducao);
     }
 
-    public static function getProducaoPlanilhaOld($codData)
+    public static function getProducaoPlanilhaAntiga($codData)
     {
         $producao = self::selectRaw('pp.*')
             ->join('produto_produzido as pp', 'pp.cd_produto_produzido', '=', 'producao.cd_produto_produzido')
@@ -38,7 +39,7 @@ class Producao extends Model
         return $ar;
     }
 
-    public static function getProducaoToCompare($codData)
+    public static function getProducaoPlanilhaAtual($codData)
     {
         $producao = self::selectRaw('pp.*')
             ->join('produto_produzido as pp', 'pp.cd_produto_produzido', '=', 'producao.cd_produto_produzido')

@@ -37,6 +37,9 @@ class UsersImportController extends Controller
 
         $ar = [];
         foreach ($produtos as $key => $value) {
+            if ('2227' == $value[1]) {
+                $teste = 'jp';
+            }
             $ar[$value[1]] = [
                 'hanking' => $value[0] ?? 0,
                 'codigo' => $value[1] ?? 0,
@@ -61,16 +64,19 @@ class UsersImportController extends Controller
         $codigoAnterior = str_replace('/', '', $request->codigo_anterior);
         $codigoAtual = str_replace('/', '', $request->codigo_atual);
 
-        $planilhaAnterior = Producao::getProducaoPlanilhaOld($codigoAnterior);
-        $planilhaAtual = Producao::getProducaoToCompare($codigoAtual);
+        $validate = self::vaildate($codigoAnterior, $codigoAtual);
+        if (false == $validate) {
+            return redirect()->back()->with('warning', 'Selecione as duas planilhas!');
+        }
+
+        $planilhaAnterior = Producao::getProducaoPlanilhaAntiga($codigoAnterior);
+        $planilhaAtual = Producao::getProducaoPlanilhaAtual($codigoAtual);
 
         $arProdutos = [];
 
         foreach ($planilhaAnterior as $value) {
-            // if ('2227' == $value->codigo) {
-            //     $teste = 'jp';
-            // }
-            $atual = $planilhaAtual[$value->codigo];
+            $atual = $planilhaAtual[$value->codigo] ?? null;
+
             if (!empty($atual)) {
                 if ($value->variacao != $atual->variacao) {
                     $arProdutos[] = $atual;
@@ -79,6 +85,7 @@ class UsersImportController extends Controller
                 $arProdutos[] = $value;
             }
         }
+
         if (empty($arProdutos)) {
             return redirect()->back()->with('warning', 'Não há diferença entre as planilhas!');
         }
@@ -104,5 +111,18 @@ class UsersImportController extends Controller
         }
 
         return redirect()->back()->with('deleteError', 'Não foi deletado!');
+    }
+
+    public static function vaildate($codigoAnterior, $codigoAtual)
+    {
+        if (Producao::SELECT_PADRAO === $codigoAtual) {
+            return false;
+        }
+
+        if (Producao::SELECT_PADRAO === $codigoAnterior) {
+            return false;
+        }
+
+        return true;
     }
 }
