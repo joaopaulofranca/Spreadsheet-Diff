@@ -126,7 +126,7 @@ class UsersImportController extends Controller
 
     public static function registroIsValid($value)
     {
-        if ($value[3] >= Producao::VARIACAO_MAX) {
+        if (intval($value[3]) >= Producao::VARIACAO_MAX) {
             return false;
         }
 

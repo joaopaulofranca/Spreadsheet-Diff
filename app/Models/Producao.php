@@ -9,7 +9,7 @@ class Producao extends Model
 {
     use HasFactory;
     public const SELECT_PADRAO = '--- Selecione ---';
-    public const VARIACAO_MAX = '50';
+    public const VARIACAO_MAX = 50;
     public $timestamps = false;
     protected $table = 'public.producao';
     protected $primaryKey = 'cd_producao';

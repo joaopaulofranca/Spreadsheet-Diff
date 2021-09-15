@@ -24,7 +24,7 @@
 <body>
     <div class="containe">
         <nav class="navbar navbar-expand-lg navbar-dark bgColor" style="color:white">
-            <a class="navbar-brand" href="/"><b>Spreadsheet Diff</b></a>
+            <a class="navbar-brand" href="/"><b> <span class="logo">!=</span>Spreadsheets Diff</b></a>
         </nav><br>
         <div class="row boxTwo">
             <div class="col-6 ">
@@ -48,14 +48,14 @@
                                     <input type="file" name="file" class="custom-file-input" id="customFileLang"
                                         required id='val' lang="es">
                                     <label class="custom-file-label" id="buttonFile" for="customFileLang"
-                                        style="color:#7c7b7b">Selecionar
-                                        Arquivo</label>
+                                        style="color:#6c6b7b">Selecionar planilha
+                                    </label>
                                 </div>
 
                             </div>
                             <div class="data">
-                                <input id="text" type="text" placeholder=" ex: MM/AAAA " name="data" minlength="6"
-                                    style="max-width:150px;" maxlength="7" class="form-control" required>
+                                <input id="text" type="text" placeholder="Ref: MM/AAAA " name="data" minlength="6"
+                                    style="max-width:160px;" maxlength="7" class="form-control" required>
                             </div>
                             <button type="submit" class="btn bgColorGray botao" onClick="mostra()" style="color:white;">
                                 Upload
@@ -210,6 +210,14 @@
     border-right: none;
     border-bottom: none;
     /* background: transparent; */
+}
+
+.logo {
+    padding: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+    background-color: #81b45b;
+    color: #1b5a3d;
 }
 
 .loader {

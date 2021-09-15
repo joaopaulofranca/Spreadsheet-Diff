@@ -38,8 +38,8 @@
                                     <th scope="col">Codigo</th>
                                     <th scope="col">Descrição</th>
                                     <th scope="col">Variação</th>
-                                    <th scope="col">Qt.Produzido</th>
-                                    <th scope="col">Estoque</th>
+                                    <!-- <th scope="col">Qt.Produzido</th> -->
+                                    <!-- <th scope="col">Estoque</th> -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -48,8 +48,8 @@
                                     <th scope="row">{{$produto->codigo}}</th>
                                     <td>{{$produto->descricao}}</td>
                                     <td>{{$produto->variacao}}</td>
-                                    <td>{{number_format($produto->qt_produzido, 2, ',', '.')}}</td>
-                                    <td>{{number_format($produto->estoque, 2, ',', '.')}}</td>
+                                    <!-- <td>{{number_format($produto->qt_produzido, 2, ',', '.')}}</td> -->
+                                    <!-- <td>{{number_format($produto->estoque, 2, ',', '.')}}</td> -->
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -74,66 +74,66 @@
 </html>
 
 <style>
-    .container {
-        width: 100%;
-        height: 15%;
-        margin: 0;
-    }
+.container {
+    width: 100%;
+    height: 15%;
+    margin: 0;
+}
 
-    .box {
-        padding: 4%;
-    }
+.box {
+    padding: 4%;
+}
 
-    .boxTwo {
-        padding: 3%;
-    }
+.boxTwo {
+    padding: 3%;
+}
 
-    .boxRelatorio {
-        align-items: center;
-        justify-content: center;
-    }
+.boxRelatorio {
+    align-items: center;
+    justify-content: center;
+}
 
-    .bgColorGreen {
-        background-color: #81b45b;
-    }
+.bgColorGreen {
+    background-color: #81b45b;
+}
 
-    .selectColorGreen {
-        background-color: #81b45b;
-        padding: 5px;
-        /* border-radius: 8%; */
-        width: 350px;
-        height: 38px;
-        line-height: 38px;
-        font-family: "Roboto", sans-serif !important;
-        color: white;
-        font-size: 12px;
-        border-top: none;
-        border-left: none;
-        border-right: none;
-        border-bottom: none;
-        /* background: transparent; */
-    }
+.selectColorGreen {
+    background-color: #81b45b;
+    padding: 5px;
+    /* border-radius: 8%; */
+    width: 350px;
+    height: 38px;
+    line-height: 38px;
+    font-family: "Roboto", sans-serif !important;
+    color: white;
+    font-size: 12px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    /* background: transparent; */
+}
 
-    .bgColor {
-        background-color: #1b5a3d;
-    }
+.bgColor {
+    background-color: #1b5a3d;
+}
 
-    .bgColorGray {
-        background-color: #7c7b7b;
-    }
+.bgColorGray {
+    background-color: #7c7b7b;
+}
 
-    button {
-        margin-top: 50px;
-        float: right;
-    }
+button {
+    margin-top: 50px;
+    float: right;
+}
 
-    body {
-        font-family: "Roboto", sans-serif;
-        overflow-x: hidden;
-    }
+body {
+    font-family: "Roboto", sans-serif;
+    overflow-x: hidden;
+}
 
-    .inputBtn {
-        margin-right: 5px;
-        background-color: #7c7b7b;
-    }
+.inputBtn {
+    margin-right: 5px;
+    background-color: #7c7b7b;
+}
 </style>
