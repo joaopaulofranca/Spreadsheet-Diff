@@ -24,7 +24,7 @@
 <body>
     <div class="containe">
         <nav class="navbar navbar-expand-lg navbar-dark bgColor" style="color:white">
-            <a class="navbar-brand" href="#"><b>Spreadsheet Diff</b></a>
+            <a class="navbar-brand" href="/"><b>Spreadsheet Diff</b></a>
         </nav><br>
         <div class="row boxTwo">
             <div class="col-6 ">

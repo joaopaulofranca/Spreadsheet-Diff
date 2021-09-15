@@ -9,6 +9,7 @@ class Producao extends Model
 {
     use HasFactory;
     public const SELECT_PADRAO = '--- Selecione ---';
+    public const VARIACAO_MAX = '50';
     public $timestamps = false;
     protected $table = 'public.producao';
     protected $primaryKey = 'cd_producao';
@@ -25,15 +26,16 @@ class Producao extends Model
 
     public static function getProducaoPlanilhaAntiga($codData)
     {
-        $producao = self::selectRaw('pp.*')
+        $producao = self::selectRaw('pp.*, concat(pp.codigo,pp.variacao) as codi_var')
             ->join('produto_produzido as pp', 'pp.cd_produto_produzido', '=', 'producao.cd_produto_produzido')
             ->where('producao.data', $codData)
+            ->orderBy('pp.descricao', 'asc')
             ->get()
         ;
 
         $ar = [];
         foreach ($producao as $value) {
-            $ar[$value->codigo] = $value;
+            $ar[$value->codi_var] = $value;
         }
 
         return $ar;
@@ -41,15 +43,16 @@ class Producao extends Model
 
     public static function getProducaoPlanilhaAtual($codData)
     {
-        $producao = self::selectRaw('pp.*')
+        $producao = self::selectRaw('pp.*, concat(pp.codigo,pp.variacao) as codi_var')
             ->join('produto_produzido as pp', 'pp.cd_produto_produzido', '=', 'producao.cd_produto_produzido')
             ->where('producao.data', $codData)
+            ->orderBy('pp.descricao', 'asc')
             ->get()
         ;
 
         $ar = [];
         foreach ($producao as $value) {
-            $ar[$value->codigo] = $value;
+            $ar[$value->codi_var] = $value;
         }
 
         return $ar;

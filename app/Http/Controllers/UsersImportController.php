@@ -37,19 +37,21 @@ class UsersImportController extends Controller
 
         $ar = [];
         foreach ($produtos as $key => $value) {
-            if ('2227' == $value[1]) {
-                $teste = 'jp';
+            if (!self::registroIsValid($value)) {
+                continue;
             }
-            $ar[$value[1]] = [
-                'hanking' => $value[0] ?? 0,
-                'codigo' => $value[1] ?? 0,
-                'descricao' => $value[2] ?? 'não informado',
-                'variacao' => $value[3] ?? 0,
-                'qt_produzido' => $value[4] ?? 0,
-                'estoque' => $value[5] ?? 0,
+
+            $ar[] = [
+                'hanking' => $value[0] ?? '0',
+                'codigo' => $value[1] ?? '0',
+                'descricao' => $value[2] ?? 'DESCONHECIDO',
+                'variacao' => $value[3] ?? '0',
+                'qt_produzido' => $value[4] ?? '0',
+                'estoque' => $value[5] ?? '0',
                 'data' => $data,
             ];
         }
+
         $list = ProdutoProduzido::insert($ar, $data);
 
         if ($list) {
@@ -75,13 +77,9 @@ class UsersImportController extends Controller
         $arProdutos = [];
 
         foreach ($planilhaAnterior as $value) {
-            $atual = $planilhaAtual[$value->codigo] ?? null;
+            $atual = $planilhaAtual[$value->codi_var] ?? null;
 
-            if (!empty($atual)) {
-                if ($value->variacao != $atual->variacao) {
-                    $arProdutos[] = $atual;
-                }
-            } else {
+            if (empty($atual)) {
                 $arProdutos[] = $value;
             }
         }
@@ -120,6 +118,19 @@ class UsersImportController extends Controller
         }
 
         if (Producao::SELECT_PADRAO === $codigoAnterior) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static function registroIsValid($value)
+    {
+        if ($value[3] >= Producao::VARIACAO_MAX) {
+            return false;
+        }
+
+        if (empty($value[3]) || null === $value[3]) {
             return false;
         }
 
