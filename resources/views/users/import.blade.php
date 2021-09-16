@@ -24,7 +24,7 @@
 <body>
     <div class="containe">
         <nav class="navbar navbar-expand-lg navbar-dark bgColor" style="color:white">
-            <a class="navbar-brand" href="/"><b> <span class="logo">!=</span>Spreadsheets Diff</b></a>
+            <a class="navbar-brand"><b>Spreadsheets Diff</b></a>
         </nav><br>
         <div class="row boxTwo">
             <div class="col-6 ">
@@ -199,8 +199,8 @@
     background-color: #81b45b;
     padding: 5px;
     /* border-radius: 8%; */
-    width: 350px;
-    height: 38px;
+    width: 60%;
+    height: 50%;
     line-height: 38px;
     font-family: "Roboto", sans-serif !important;
     color: white;
@@ -210,14 +210,6 @@
     border-right: none;
     border-bottom: none;
     /* background: transparent; */
-}
-
-.logo {
-    padding: 10px;
-    border-radius: 50%;
-    margin-right: 10px;
-    background-color: #81b45b;
-    color: #1b5a3d;
 }
 
 .loader {
