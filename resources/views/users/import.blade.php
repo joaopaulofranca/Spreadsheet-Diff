@@ -39,7 +39,7 @@
 
                     <div class="card-body">
 
-                        <form action="/users/import" method="post" enctype="multipart/form-data">
+                        <form action="/import" method="post" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group">
@@ -88,7 +88,7 @@
                                         <td>Referente ao mês {{preg_replace("/(\d{2})(\d{4})/", "\$1/\$2",
                                             $selectListInfo->data) }}</td>
                                         <td align="center">
-                                            <form method="POST" action="/users/remove/{{ $selectListInfo->data }}">
+                                            <form method="POST" action="/remove/{{ $selectListInfo->data }}">
                                                 @csrf
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <button type="submit" class="btn bgColorGray btnB" style="color:white;"
@@ -125,7 +125,7 @@
                 <div class="card">
                     <div class="card-header bgColorGray" style="color:white;"><b>COMPARAR PLANILHA</b></div>
                     <div class="card-body">
-                        <form action="/users/compare" method="post" enctype="multipart/form-data">
+                        <form action="/compare" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 @csrf
                                 <div class="col-6">

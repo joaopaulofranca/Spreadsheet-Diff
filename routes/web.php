@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', 'App\Http\Controllers\UsersImportController@index');
-Route::post('/users/import', 'App\Http\Controllers\UsersImportController@store');
-Route::post('/users/compare', 'App\Http\Controllers\UsersImportController@compare');
-Route::get('/users/relatorio', 'App\Http\Controllers\UsersImportController@relatorio');
-Route::delete('/users/remove/{data}', 'App\Http\Controllers\UsersImportController@destroy');
+Route::post('/import', 'App\Http\Controllers\UsersImportController@store');
+Route::post('/compare', 'App\Http\Controllers\UsersImportController@compare');
+Route::get('/relatorio', 'App\Http\Controllers\UsersImportController@relatorio');
+Route::delete('/remove/{data}', 'App\Http\Controllers\UsersImportController@destroy');
