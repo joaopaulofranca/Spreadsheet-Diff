@@ -21,7 +21,8 @@
 <body>
     <div class="containe">
         <nav class="navbar navbar-expand-lg navbar-dark bgColor" style="color:white">
-            <a class="navbar-brand" href="#"><b>Spreadsheet Diff</b></a>
+            <a href=""></a><img src="{{ url('/logo.png') }}" width="60px" style="margin-right: 15px;"><b>Spreadsheet
+                Diff</b></a>
 
         </nav><br>
 

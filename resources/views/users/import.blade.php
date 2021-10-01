@@ -24,7 +24,9 @@
 <body>
     <div class="containe">
         <nav class="navbar navbar-expand-lg navbar-dark bgColor" style="color:white">
-            <a class="navbar-brand"><b>Spreadsheets Diff</b></a>
+            <a class="navbar-brand"><img src="{{ url('/logo.png') }}" width="60px"
+                    style="margin-right: 15px"><b>Spreadsheets
+                    Diff</b></a>
         </nav><br>
         <div class="row boxTwo">
             <div class="col-6 ">
